@@ -7,6 +7,7 @@ describe Location do
 		newyork.country = "USA" 
 		expect(newyork).to be_valid
 	end
+  
  	it "is invalid without a city" do
  		expect(Location.new(city: nil )).to have(1).errors_on(:city)
  	end

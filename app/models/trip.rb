@@ -1,4 +1,5 @@
 class Trip < ActiveRecord::Base
-  has_one :location
+  belongs_to :location
+  validates_presence_of :location, :duration
 
 end

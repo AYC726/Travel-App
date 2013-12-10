@@ -13,7 +13,17 @@ describe Trip do
 
     expect(nyctrip).to be_valid
   end
-	it "is invalid without a duration"
-	it "is invalid without a location"
-	it "accepts days for duration"
+	
+  it "is invalid without a duration" do
+    expect(Trip.new(duration: nil )).to have(1).errors_on(:duration)
+  end
+	
+  it "is invalid without a location" do
+    expect(Trip.new(location: nil )).to have(1).errors_on(:location)
+  end
+
+	pending "accepts days for duration" do
+
+  end
+
 end
