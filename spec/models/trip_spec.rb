@@ -15,15 +15,15 @@ describe Trip do
   end
 	
   it "is invalid without a duration" do
-    expect(Trip.new(duration: nil )).to have(1).errors_on(:duration)
+    expect(Trip.new(duration: nil )).to have(2).errors_on(:duration)
   end
 	
   it "is invalid without a location" do
     expect(Trip.new(location: nil )).to have(1).errors_on(:location)
   end
 
-	pending "accepts days for duration" do
-
+	it "accepts days for duration" do
+    expect(Trip.new(duration: 5.5)).to have(1).errors_on(:duration)
   end
 
 end
