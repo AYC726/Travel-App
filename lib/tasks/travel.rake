@@ -3,7 +3,7 @@ namespace :travel do
     puts "Scraping lodging..."
 
     scraper = LodgingScraper.new
-    scraper.call
+    scraper.find_cities_hostel
       # go through 150 cities (Stay.com)
 
 
