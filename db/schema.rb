@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131210022923) do
+ActiveRecord::Schema.define(version: 20131210160340) do
 
   create_table "activities", force: true do |t|
     t.string   "type_of_activity"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 20131210022923) do
     t.string   "photo"
     t.string   "price"
     t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "flights", force: true do |t|
+    t.string   "depart_date"
+    t.string   "return_date"
+    t.string   "flying_from"
+    t.string   "flying_to"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
