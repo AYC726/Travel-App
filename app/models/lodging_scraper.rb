@@ -21,7 +21,7 @@ class LodgingScraper
     page = page.link_with(:href => /\/Hotels\S*/).click
     puts "Loaded hotels! #{page.title}"
 
-    page = page.link_with(:text => "All specialty lodgings").click
+    page = page.link_with(:text => "All ").click
     puts "Loaded! #{page.title}"
 
     hostel_link = "http://www.tripadvisor.com"+ page.link_with(:text => "Hostel").href

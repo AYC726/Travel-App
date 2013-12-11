@@ -11,4 +11,11 @@ namespace :scrape do
     scraper = RestaurantScraper.new
     scraper.find_cities_restaurant
   end
+
+  task :activity => :environment do
+    puts "Scraping activity..."
+    scraper = ActivityScraper.new
+    scraper.find_cities_activity
+  end
+
 end
