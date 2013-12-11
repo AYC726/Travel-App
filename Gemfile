@@ -51,6 +51,10 @@ gem 'mechanize'
 gem 'rvm-capistrano'
 
 
+group :development do
+  gem 'seed_dump'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
