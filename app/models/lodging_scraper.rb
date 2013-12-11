@@ -11,27 +11,21 @@ class LodgingScraper
     agent = Mechanize.new
     page = agent.get("http://www.tripadvisor.com/") #enter tripadvisor
     tripadvisor_form = page.form
-    tripadvisor_form.q = 'Brooklyn, USA'  #input city and country
+    tripadvisor_form.q = "Brooklyn, USA"  #input city and country
     page = agent.submit(tripadvisor_form) #submit the form 
+    puts "Loaded search results! #{page.title}"
 
-    page = agent.page.link_with(:href => /\/Tourism\S*/).click
-    page = agent.submit(tripadvisor_form)
-    puts "loading for hotels"
+    page = page.link_with(:href => /\/Tourism\S*/).click
+    puts "Loaded city! #{page.title}"
 
-    page = agent.page.link_with(:href => /\/Hotels\S*/).click
-    page = agent.submit(tripadvisor_form)
-    puts "loading for Specialty Lodging"
+    page = page.link_with(:href => /\/Hotels\S*/).click
+    puts "Loaded hotels! #{page.title}"
 
+    page = page.link_with(:text => "All specialty lodgings").click
+    puts "Loaded! #{page.title}"
 
-    page = agent.page.link_with(:text => '<b>Specialty Lodging</b>').click
-    page = agent.submit(tripadvisor_form)
-    puts "loading for hostel"
-
-    page = agent.page.link_with(:text => 'Hostel').click
-    page = agent.submit(tripadvisor_form)
-
-
+    page = page.link_with(:text => "Hostel").click
+    puts "Loaded! #{page.title}"
 
   end
-
 end

@@ -1,4 +1,4 @@
-namespace :travel do
+namespace :scrape do
   task :lodging => :environment do
     puts "Scraping lodging..."
 
