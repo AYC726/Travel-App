@@ -41,7 +41,7 @@ Location.create!([
   {city: "Frankfurt", country: "Germany", state: nil},
   {city: "Fuerteventura", country: "Spain", state: nil},
   {city: "Geneva", country: "Switzerland", state: nil},
-  {city: "Glasgow", country: "Scotland", state: ""},
+  {city: "Glasgow", country: "Scotland", state: nil},
   {city: "Gothenburg", country: "Sweden", state: nil},
   {city: "Gran Canaria", country: "Spain", state: nil},
   {city: "Granada", country: "Spain", state: nil},
