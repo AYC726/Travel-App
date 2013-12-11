@@ -1,7 +1,7 @@
 class LodgingScraper
   require 'open-uri'
 
-  attr_accessor :name, :type_of_lodging, :location, :picture, :description, :price
+  attr_accessor :lodging_data, :name, :type_of_lodging, :location, :picture, :description, :price
 
   def initialize
     
@@ -24,8 +24,12 @@ class LodgingScraper
     page = page.link_with(:text => "All specialty lodgings").click
     puts "Loaded! #{page.title}"
 
-    page = page.link_with(:text => "Hostel").click
-    puts "Loaded! #{page.title}"
+    hostel_link = "http://www.tripadvisor.com"+ page.link_with(:text => "Hostel").href
+    puts "got hostel link! #{hostel_link}"
+
+    @lodging_data = Nokogiri::HTML(open(hostel_link))
+    puts @lodging_data.css("a.property_title").text
+
 
   end
 end
