@@ -6,7 +6,7 @@ namespace :scrape do
     scraper.find_cities_hostel
   end
 
-  task :restaurant => :enviroment do
+  task :restaurant => :environment do
     puts "Scraping restaurant..."
     scraper = RestaurantScraper.new
     scraper.find_cities_restaurant

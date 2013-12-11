@@ -30,7 +30,7 @@ class LodgingScraper
     @lodging_data = Nokogiri::HTML(open(hostel_link))
     puts @lodging_data.css("a.property_title").text
     binding.pry
-    puts @lodging_data.css("a.photo_link img").text
+    puts @lodging_data.css("div.sizedThumb img").attr("src").text
 
 
   end
