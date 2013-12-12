@@ -33,6 +33,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development do
+  gem 'seed_dump'
+end
 
 group :test, :development do
   gem 'rspec-rails'
@@ -49,11 +52,7 @@ end
 gem 'nokogiri'
 gem 'mechanize'
 gem 'rvm-capistrano'
-
-
-group :development do
-  gem 'seed_dump'
-end
+gem 'watir'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

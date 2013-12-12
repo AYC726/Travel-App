@@ -3,7 +3,7 @@ namespace :scrape do
   task :lodging => :environment do
     puts "Scraping lodging..."
     scraper = LodgingScraper.new
-    scraper.find_cities_hostel
+    scraper.run
   end
 
   task :restaurant => :environment do
