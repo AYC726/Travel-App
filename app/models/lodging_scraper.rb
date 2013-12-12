@@ -18,8 +18,11 @@ class LodgingScraper
 
   def run
     (0..9).each do |i|
+      print "#{i+1}. "
       puts get_lodging_name(@lodging_data.css("div.fabdetails ul li h2 a")[i])
       puts get_lodging_link(@lodging_data.css("div.fabdetails ul li h2 a")[i])
+      puts get_lodging_picture(@lodging_data.css("div.fabresultimage img")[i])
+      puts ""
     end
   end
 
@@ -29,5 +32,10 @@ class LodgingScraper
 
   def get_lodging_link(nokogiri_obj)
     nokogiri_obj.attr("href").strip
+  end
+
+  def get_lodging_picture(nokogiri_obj)
+    small_img = nokogiri_obj.attr("src").strip
+    small_img.gsub("s.jpg", "l.jpg")
   end
 end
