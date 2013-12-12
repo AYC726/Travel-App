@@ -1,13 +1,16 @@
 class LodgingScraper
   require 'open-uri'
+  include Capybara::DSL
 
   attr_accessor :lodging_data, :name, :url, :type_of_lodging, :location, :picture, :description, :price
 
   def initialize
-    browser = Watir::Browser.new
-    browser.goto build_hostelworld_search_url("Dublin", "Ireland")
-
-    @lodging_data = Nokogiri::HTML.parse(browser.html)
+    # browser = Watir::Browser.new
+    # browser.goto build_hostelworld_search_url("Dublin", "Ireland")
+    Capybara.current_driver = :webkit
+    
+    visit(build_hostelworld_search_url("Dublin", "Ireland"))
+    @lodging_data = Nokogiri::HTML.parse(body)
   end
 
   def build_hostelworld_search_url(city, country)
