@@ -1,7 +1,7 @@
 class ActivityScraper
   require 'open-uri'
 
-  attr_accessor :attraction_data, :activity_data, :name, :type_of_activity, :location, :picture, :description, :price
+  attr_accessor :attraction_data, :activity_data, :name, :type_of_activity, :location, :attraction_picture, :activity_picture, :description, :price
 
   def initialize
     
@@ -11,7 +11,7 @@ class ActivityScraper
     agent = Mechanize.new
     page = agent.get("http://www.tripadvisor.com/") #enter tripadvisor
     tripadvisor_form = page.form
-    tripadvisor_form.q = "Hong Kong, China"  #input city and country
+    tripadvisor_form.q = "Brooklyn, USA"  #input city and country
     page = agent.submit(tripadvisor_form) #submit the form 
     puts "Loaded search results! #{page.title}"
 
@@ -23,24 +23,35 @@ class ActivityScraper
     puts "got attraction link! #{attraction_link}"
 
     @attraction_data = Nokogiri::HTML(open(attraction_link))
-    puts @attraction_data.css("a.property_title").text
-
-
-   
-    @picture = Nokogiri::HTML(open(attraction_link))
+    a = 0
+    while a <= 9
+      puts @attraction_data.css("a.property_title")[a].text
+      a+=1
+    end
+    # binding.pry
+    @attraction_picture = Nokogiri::HTML(open(attraction_link))
     i = 0
-    while i != 10
-      puts @picture.css(".photo_image")[i].to_a[0][1]
+    while i <= 9
+      puts @attraction_picture.css(".photo_image")[i].to_a[0][1]
       i+=1
     end  
-
-    binding.pry
 
     activity_link = "http://www.tripadvisor.com"+ @attraction_data.css("h2#ACTIVITIES_TAB a").first.attr("href")
     puts "got activity link! #{activity_link}"
 
     @activity_data = Nokogiri::HTML(open(activity_link))
-    puts @activity_data.css("a.property_title").text
-      
+    b = 0
+    while b <= 9
+      puts @activity_data.css("a.property_title")[b].text
+      b+=1
+    end
+
+    @activity_picture = Nokogiri::HTML(open(activity_link))
+    c = 0
+    while c <= 9
+      puts @activity_picture.css(".photo_image")[c].to_a[0][1]
+      c+=1
+    end  
+
   end
 end
