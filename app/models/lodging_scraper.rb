@@ -5,10 +5,19 @@ class LodgingScraper
   attr_accessor :lodging_data, :name, :url, :type_of_lodging, :location, :picture, :description, :price
 
   def initialize
-    Capybara.current_driver = :webkit
-    visit(build_hostelworld_search_url("Dublin", "Ireland"))
-    body
-    @lodging_data = Nokogiri::HTML.parse(body)
+    if File.exist?("lib/assets/hw-lodging.txt")
+      puts "... loading from file"
+      @lodging_data = Nokogiri::HTML.parse(File.open("lib/assets/hw-lodging.txt"))
+    else
+      puts "... scraping hostelworld "
+      Capybara.current_driver = :webkit
+      visit(build_hostelworld_search_url("Dublin", "Ireland"))
+      @lodging_data = Nokogiri::HTML.parse(body)
+
+      f = File.open("lib/assets/hw-lodging.txt", "w")
+      f << @lodging_data
+      f.close
+    end
   end
 
   def build_hostelworld_search_url(city, country)
