@@ -40,12 +40,12 @@ class RestaurantScraper
     binding.pry
     price_of_restaurant
 
-    @price_of_restaurant = Nokogiri::HTML(open(restaurant_link))
-    i = 0
-    while i <= 20
-      puts price_of_restaurant.css(".information")[i].text
-      i+=1
-    end
-
+    # @price_of_restaurant = Nokogiri::HTML(open(restaurant_link))
+    # i = 0
+    # while i <= 20
+    #   puts price_of_restaurant.css(".information")[i].text
+    #   i+=1
+    # end
+        binding.pry
   end
 end

@@ -1,7 +1,7 @@
 class ActivityScraper
   require 'open-uri'
 
-  attr_accessor :attraction_data, :activity_data, :name, :type_of_activity, :location, :attraction_picture, :activity_picture, :description, :price
+  attr_accessor :attraction_data, :activity_data, :name, :type_of_activity, :location, :attraction_picture, :activity_picture, :attraction_description, :activity_description, :price
 
   def initialize
     
@@ -11,7 +11,7 @@ class ActivityScraper
     agent = Mechanize.new
     page = agent.get("http://www.tripadvisor.com/") #enter tripadvisor
     tripadvisor_form = page.form
-    tripadvisor_form.q = "Brooklyn, USA"  #input city and country
+    tripadvisor_form.q = "Seattle, USA"  #input city and country
     page = agent.submit(tripadvisor_form) #submit the form 
     puts "Loaded search results! #{page.title}"
 
@@ -28,6 +28,15 @@ class ActivityScraper
       puts @attraction_data.css("a.property_title")[a].text
       a+=1
     end
+
+    @attraction_description = Nokogiri::HTML(open(attraction_link))
+    d = 0
+    while d <= 9
+      puts @attraction_description.css(".onHide")[d].text
+      d+=1
+    end
+    puts ""
+
     # binding.pry
     @attraction_picture = Nokogiri::HTML(open(attraction_link))
     i = 0
