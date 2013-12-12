@@ -5,11 +5,9 @@ class LodgingScraper
   attr_accessor :lodging_data, :name, :url, :type_of_lodging, :location, :picture, :description, :price
 
   def initialize
-    # browser = Watir::Browser.new
-    # browser.goto build_hostelworld_search_url("Dublin", "Ireland")
     Capybara.current_driver = :webkit
-    
     visit(build_hostelworld_search_url("Dublin", "Ireland"))
+    body
     @lodging_data = Nokogiri::HTML.parse(body)
   end
 
@@ -25,6 +23,7 @@ class LodgingScraper
       puts get_lodging_name(@lodging_data.css("div.fabdetails ul li h2 a")[i])
       puts get_lodging_link(@lodging_data.css("div.fabdetails ul li h2 a")[i])
       puts get_lodging_picture(@lodging_data.css("div.fabresultimage img")[i])
+      puts get_lodging_price(@lodging_data.css("div.fabpricing ul")[i])
       puts ""
     end
   end
@@ -39,6 +38,12 @@ class LodgingScraper
 
   def get_lodging_picture(nokogiri_obj)
     small_img = nokogiri_obj.attr("src").strip
-    small_img.gsub("s.jpg", "l.jpg")
+    small_img.gsub("_s.jpg", ".jpg")
+  end
+
+  def get_lodging_price(nokogiri_obj)
+    nokogiri_obj.css("span.fabprice").map do |price|
+      price.text.strip.gsub("US$", "").to_f
+    end.sort.first
   end
 end
