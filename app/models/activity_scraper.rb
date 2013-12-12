@@ -11,7 +11,7 @@ class ActivityScraper
     agent = Mechanize.new
     page = agent.get("http://www.tripadvisor.com/") #enter tripadvisor
     tripadvisor_form = page.form
-    tripadvisor_form.q = "Budapest, Hungary"  #input city and country
+    tripadvisor_form.q = "Hong Kong, China"  #input city and country
     page = agent.submit(tripadvisor_form) #submit the form 
     puts "Loaded search results! #{page.title}"
 
@@ -26,6 +26,15 @@ class ActivityScraper
     puts @attraction_data.css("a.property_title").text
 
 
+   
+    @picture = Nokogiri::HTML(open(attraction_link))
+    i = 0
+    while i != 10
+      puts @picture.css(".photo_image")[i].to_a[0][1]
+      i+=1
+    end  
+
+    binding.pry
 
     activity_link = "http://www.tripadvisor.com"+ @attraction_data.css("h2#ACTIVITIES_TAB a").first.attr("href")
     puts "got activity link! #{activity_link}"
