@@ -32,6 +32,7 @@ class LodgingScraper
       puts get_lodging_name(@lodging_data.css("div.fabdetails ul li h2 a")[i])
       puts get_lodging_link(@lodging_data.css("div.fabdetails ul li h2 a")[i])
       puts get_lodging_picture(@lodging_data.css("div.fabresultimage img")[i])
+      puts get_lodging_type(@lodging_data.css("div.fabresultimage span")[i])
       puts get_lodging_price(@lodging_data.css("div.fabpricing ul")[i])
       puts ""
     end
@@ -54,5 +55,9 @@ class LodgingScraper
     nokogiri_obj.css("span.fabprice").map do |price|
       price.text.strip.gsub("US$", "").to_f
     end.sort.first
+  end
+
+  def get_lodging_type(nokogiri_obj)
+    nokogiri_obj.text.strip.downcase
   end
 end
