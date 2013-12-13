@@ -11,7 +11,7 @@ class ActivityScraper
     agent = Mechanize.new
     page = agent.get("http://www.tripadvisor.com/") #enter tripadvisor
     tripadvisor_form = page.form
-    tripadvisor_form.q = "Brooklyn, USA"  #input city and country
+    tripadvisor_form.q = "Seattle, USA"  #input city and country
     page = agent.submit(tripadvisor_form) #submit the form 
     puts "Loaded search results! #{page.title}"
 
@@ -62,7 +62,7 @@ class ActivityScraper
       e+=1
     end
     puts ""
-
+    
     @activity_picture = Nokogiri::HTML(open(activity_link))
     c = 0
     while c <= 9

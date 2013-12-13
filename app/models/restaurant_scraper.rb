@@ -1,13 +1,13 @@
 class RestaurantScraper
    require 'open-uri'
 
-   attr_accessor :restaurant_name, :type_of_restaurant, :location, :picture, :description, :price_of_restaurant
+   attr_accessor :restaurant_name, :type_of_restaurant, :location, :picture, :price_of_restaurant
 
    def find_cities_restaurant
     agent = Mechanize.new
     page = agent.get("http://www.tripadvisor.com/") #enter tripadvisor
     tripadvisor_form = page.form
-    tripadvisor_form.q = "Seattle, USA"  #input city and country
+    tripadvisor_form.q = "philadelphia, USA"  #input city and country
     page = agent.submit(tripadvisor_form) #submit the form 
     puts "Loaded search results! #{page.title}"
 
@@ -33,19 +33,22 @@ class RestaurantScraper
 
     @type_of_restaurant = Nokogiri::HTML(open(restaurant_link))
     i = 1
-    while i <= 20
-      puts type_of_restaurant.css(".information")[i].text
+    while i <= 9
+      if type_of_restaurant.css(".information.price")[i].text == nil
+        puts "no price information"
+        i+=1
+      else
+        puts type_of_restaurant.css(".information.price")[i].text
+        i+=1
+      end
+    end
+
+    @price_of_restaurant = Nokogiri::HTML(open(restaurant_link))
+    i = 0
+    while i <= 9
+      puts price_of_restaurant.css(".information.cuisine")[i].text
       i+=1
     end
-    binding.pry
-    price_of_restaurant
 
-    # @price_of_restaurant = Nokogiri::HTML(open(restaurant_link))
-    # i = 0
-    # while i <= 20
-    #   puts price_of_restaurant.css(".information")[i].text
-    #   i+=1
-    # end
-        binding.pry
   end
 end
