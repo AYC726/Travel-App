@@ -29,11 +29,14 @@ class LodgingScraper
   def run
     (0..9).each do |i|
       print "#{i+1}. "
-      puts get_lodging_name(@lodging_data.css("div.fabdetails ul li h2 a")[i])
-      puts get_lodging_link(@lodging_data.css("div.fabdetails ul li h2 a")[i])
-      puts get_lodging_picture(@lodging_data.css("div.fabresultimage img")[i])
-      puts get_lodging_type(@lodging_data.css("div.fabresultimage span")[i])
-      puts get_lodging_price(@lodging_data.css("div.fabpricing ul")[i])
+      pp Lodging.create(
+        name: get_lodging_name(@lodging_data.css("div.fabdetails ul li h2 a")[i]),
+        url: get_lodging_link(@lodging_data.css("div.fabdetails ul li h2 a")[i]),
+        picture: get_lodging_picture(@lodging_data.css("div.fabresultimage img")[i]),
+        type_of_lodging: get_lodging_type(@lodging_data.css("div.fabresultimage span")[i]),
+        price: get_lodging_price(@lodging_data.css("div.fabpricing ul")[i]),
+        location_id: 35
+      )
       puts ""
     end
   end

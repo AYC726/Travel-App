@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131211204145) do
+ActiveRecord::Schema.define(version: 20131213014103) do
 
   create_table "activities", force: true do |t|
     t.string   "type_of_activity"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 20131211204145) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.string   "url"
+    t.string   "picture"
   end
 
   create_table "restaurants", force: true do |t|
